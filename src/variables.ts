@@ -1,5 +1,5 @@
 import type { CompanionVariableDefinition } from '@companion-module/base'
-import { variableId } from '../enums.js'
+import { variableId } from './enums.js'
 
 export function variables(): CompanionVariableDefinition[] {
 	return [

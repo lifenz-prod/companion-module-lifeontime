@@ -9,7 +9,7 @@ import type {
 } from '@companion-module/base'
 import { combineRgb } from '@companion-module/base'
 import { OntimeV3 } from '../ontimev3.js'
-import { MAX_TIME_SECONDS } from '../../enums.js'
+import { MAX_TIME_SECONDS } from '../enums.js'
 
 const throttledEndpointText =
 	'This property will cause a recalculation of the rundwon\nand id therfor throttled by ontime'

@@ -1,12 +1,12 @@
 {
-	"name": "getontime-ontime",
-	"version": "4.6.3",
+	"name": "lifeontime-ontime",
+	"version": "1.0.0",
 	"main": "/dist/index.js",
 	"license": "MIT",
 	"prettier": "@companion-module/tools/.prettierrc.json",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/bitfocus/companion-module-getontime-ontime.git"
+		"url": "git+https://github.com/nzalan01/companion-module-lifeontime.git"
 	},
 	"type": "module",
 	"scripts": {

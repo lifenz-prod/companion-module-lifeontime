@@ -1,8 +1,8 @@
 import { type InputValue, InstanceStatus } from '@companion-module/base'
-import { OnTimeInstance } from '../index.js'
+import { OnTimeInstance } from './index.js'
 import Websocket from 'ws'
-import { findPreviousPlayableEvent, msToSplitTime, makeURL, variablesFromCustomFields } from '../utilities.js'
-import { feedbackId, variableId } from '../enums.js'
+import { findPreviousPlayableEvent, msToSplitTime, makeURL, variablesFromCustomFields } from './utilities.js'
+import { feedbackId, variableId } from './enums.js'
 import type {
 	CurrentBlockState,
 	MessageState,

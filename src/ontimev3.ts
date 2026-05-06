@@ -4,7 +4,7 @@ import type {
 	CompanionPresetDefinitions,
 	CompanionVariableDefinition,
 } from '@companion-module/base'
-import { OnTimeInstance, type OntimeClient } from '../index.js'
+import { OnTimeInstance, type OntimeClient } from './index.js'
 
 import { connect, disconnectSocket } from './connection.js'
 import type { CustomFields, OntimeEvent } from './ontime-types.js'

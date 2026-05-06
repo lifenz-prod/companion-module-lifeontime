@@ -1,6 +1,6 @@
 import type { CompanionActionDefinition, CompanionActionEvent } from '@companion-module/base'
 import { socketSendJson } from '../connection.js'
-import { ActionId } from '../../enums.js'
+import { ActionId } from '../enums.js'
 import { ActionCommand } from './commands.js'
 import { eventPicker } from './eventPicker.js'
 import { OntimeV3 } from '../ontimev3.js'

@@ -1,22 +1,16 @@
 {
-	"id": "getontime-ontime",
-	"name": "getontime-ontime",
+	"id": "lifeontime-ontime",
+	"name": "lifeontime-ontime",
 	"shortname": "ontime",
-	"description": "Companion module for ontime",
-	"version": "4.6.3",
+	"description": "Companion module for Life On Time (Ontime v3 fork)",
+	"version": "1.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-getontime-ontime.git",
-	"bugs": "https://github.com/bitfocus/companion-module-getontime-ontime/issues",
+	"repository": "git+https://github.com/nzalan01/companion-module-lifeontime.git",
+	"bugs": "https://github.com/nzalan01/companion-module-lifeontime/issues",
 	"maintainers": [
 		{
-			"name": "Carlos Valente",
-			"email": "mail@ontime.no"
-		},
-		{
-			"name": "Fabian Posenau"
-		},
-		{
-			"name": "Alex Christoffer Rasmussen"
+			"name": "Alan Aiken",
+			"email": "alan.aiken@lifenz.org"
 		}
 	],
 	"legacyIds": [],
