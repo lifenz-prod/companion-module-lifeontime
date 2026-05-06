@@ -254,8 +254,8 @@ const playbackPresets: { [id: string]: CompanionButtonPresetDefinition } = {
 			{
 				down: [
 					{
-						actionId: ActionId.Start,
-						options: { method: 'next' },
+						actionId: ActionId.StartNext,
+						options: {},
 					},
 				],
 				up: [],

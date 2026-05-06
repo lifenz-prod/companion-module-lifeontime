@@ -5,6 +5,7 @@ export const MAX_TIME_SECONDS = 23 * 60 * 60 + 59 * 60 + 59
 
 export enum ActionId {
 	Start = 'start',
+	StartNext = 'start-next',
 	Load = 'load',
 	Pause = 'pause',
 	Stop = 'stop',

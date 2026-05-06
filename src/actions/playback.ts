@@ -116,6 +116,11 @@ export function createPlaybackActions(ontime: OntimeV3): { [id: string]: Compani
 			options: [],
 			callback: () => socketSendJson(ActionCommand.Reload),
 		},
+		[ActionId.StartNext]: {
+			name: 'Start next event',
+			options: [],
+			callback: () => socketSendJson(ActionCommand.Start, 'next'),
+		},
 
 		[ActionId.Roll]: {
 			name: 'Start roll mode',
