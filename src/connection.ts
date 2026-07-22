@@ -281,8 +281,8 @@ export function connect(self: OnTimeInstance, ontime: OntimeV3): void {
 					const version = payload.split('.')
 					self.log('info', `Ontime version "${payload}"`)
 					self.log('debug', version)
-					if (version.at(0) === '3') {
-						if (Number(version.at(1)) < 6) {
+					if (version.at(0) === '3' || version.at(0) === '4') {
+						if (version.at(0) === '3' && Number(version.at(1)) < 6) {
 							self.updateStatus(
 								InstanceStatus.BadConfig,
 								'Ontime version is too old (required >3.6.0) some features are not available',
