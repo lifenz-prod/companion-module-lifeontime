@@ -1,15 +1,23 @@
 import type { CompanionFeedbackBooleanEvent, CompanionFeedbackDefinition } from '@companion-module/base'
 import { OntimeV3 } from '../ontimev3.js'
 import { feedbackId, OffsetState } from '../enums.js'
+import { OffsetMode } from '../ontime-types.js'
 import { DangerRed, White } from '../assets/colours.js'
 
 export function createOffsetFeedbacks(ontime: OntimeV3): { [id: string]: CompanionFeedbackDefinition } {
 	function offset(feedback: CompanionFeedbackBooleanEvent): boolean {
 		const state = feedback.options.state as OffsetState | undefined
 		if (!state) return false
-		if (ontime.state.runtime.offset === null || ontime.state.runtime.offset === undefined) return false
+
+		// ontime v4 tracks both flavours, `mode` follows whichever ontime is currently showing
+		const source = feedback.options.source ?? 'mode'
+		const useRelative =
+			source === 'relative' || (source === 'mode' && ontime.state.runtime.offsetMode === OffsetMode.Relative)
+		const value = useRelative ? ontime.state.runtime.relativeOffset : ontime.state.runtime.offset
+
+		if (value === null || value === undefined) return false
 		const margin = Number(feedback.options.margin)
-		const offset = ontime.state.runtime.offset / 1000
+		const offset = value / 1000
 		switch (state) {
 			case OffsetState.On:
 				return offset > -margin && offset < margin
@@ -45,6 +53,17 @@ export function createOffsetFeedbacks(ontime: OntimeV3): { [id: string]: Compani
 						{ id: OffsetState.Both, label: 'Behind or Ahead of schedule' },
 					],
 					default: 'behind',
+				},
+				{
+					type: 'dropdown',
+					label: 'Offset',
+					id: 'source',
+					choices: [
+						{ id: 'mode', label: 'Follow ontime’s offset mode' },
+						{ id: OffsetMode.Absolute, label: 'Absolute' },
+						{ id: OffsetMode.Relative, label: 'Relative' },
+					],
+					default: 'mode',
 				},
 				{
 					type: 'number',

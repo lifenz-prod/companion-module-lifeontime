@@ -5,6 +5,8 @@ import { createMessageActions } from './message.js'
 import { createChangeActions } from './change.js'
 import { OntimeV3 } from '../ontimev3.js'
 import { createAuxTimerActions } from './auxTimer.js'
+import { createRundownSourceActions } from './rundownSource.js'
+import { createRuntimeActions } from './runtime.js'
 
 /**
  * Returns all implemented actions.
@@ -18,6 +20,8 @@ export function actions(ontime: OntimeV3): CompanionActionDefinitions {
 		...createPlaybackActions(ontime),
 		...createChangeActions(ontime),
 		...createAuxTimerActions(ontime),
+		...createRuntimeActions(ontime),
+		...createRundownSourceActions(ontime),
 	}
 	return actions
 }

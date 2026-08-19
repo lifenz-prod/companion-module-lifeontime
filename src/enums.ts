@@ -27,6 +27,12 @@ export enum ActionId {
 	AuxTimerPlayState = 'auxTimerPlayState',
 	AuxTimerDirection = 'auxTimerDirection',
 	AuxTimerAdd = 'auxTimerAdd',
+
+	GlobalDelay = 'globalDelay',
+	OffsetMode = 'offsetMode',
+
+	LoadSource = 'loadSource',
+	RefreshSources = 'refreshSources',
 }
 
 export enum deprecatedActionId {
@@ -72,6 +78,18 @@ export enum feedbackId {
 
 	AuxTimerPlayback = 'auxTimerPlayback',
 	AuxTimerNegative = 'auxTimerNegativePlayback',
+
+	QlabConnection = 'qlabConnection',
+	QlabPaused = 'qlabPaused',
+	QlabPhase = 'qlabPhase',
+	QlabProgressBar = 'qlabProgressBar',
+
+	RundownSourceLoaded = 'rundownSourceLoaded',
+	RundownSourceBusy = 'rundownSourceBusy',
+	RundownSourceError = 'rundownSourceError',
+	RecallBlocked = 'rundownSourceRecallBlocked',
+
+	ServiceSection = 'serviceSection',
 }
 
 export enum deprecatedFeedbackId {
@@ -138,8 +156,41 @@ export enum variableId {
 	AuxTimerCurrent = 'auxTimer_current_hms',
 	AuxTimerDirection = 'auxTimer_direction',
 
+	QlabEnabled = 'qlab_enabled',
+	QlabConnected = 'qlab_connected',
+	QlabCueName = 'qlab_cue_name',
+	QlabCueNumber = 'qlab_cue_number',
+	QlabDurationMs = 'qlab_duration_ms',
+	QlabElapsedMs = 'qlab_elapsed_ms',
+	QlabRemainingMs = 'qlab_remaining_ms',
+	QlabDuration = 'qlab_duration_hms',
+	QlabElapsed = 'qlab_elapsed_hms',
+	QlabRemaining = 'qlab_remaining_hms',
+	QlabPaused = 'qlab_paused',
+	QlabPhase = 'qlab_phase',
+
+	SourceProvider = 'source_provider',
+	SourceContainerId = 'source_container_id',
+	SourceCount = 'source_count',
+	SourceLoaded = 'source_loaded',
+	SourceLoading = 'source_loading',
+	SourceError = 'source_error',
+	SourceRevision = 'source_revision',
+	SourceList = 'source_list',
+	/** suffixed with the 1 based source index, eg. source_name-1 */
+	SourceName = 'source_name',
+
+	ServiceNow = 'service_now',
+	ServiceSectionNow = 'service_section_now',
+	ServiceNext = 'service_next',
+	ServiceSectionNext = 'service_section_next',
+
 	NumberOfEvents = 'numEvents',
 	SelectedEventIndex = 'selectedEventIndex',
+	GlobalDelay = 'rundown_global_delay_hms',
+	GlobalDelayMs = 'rundown_global_delay_ms',
+	OffsetMode = 'rundown_offset_mode',
+	RelativeOffset = 'rundown_relative_offset_hms',
 	RundownOffset = 'rundown_offset_hms',
 	PlannedStart = 'plannedStart_hms',
 	ActualStart = 'actualStart_hms',

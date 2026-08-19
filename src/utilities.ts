@@ -1,5 +1,6 @@
 import type { CompanionVariableValues, DropdownChoice } from '@companion-module/base'
 import type { EventCustomFields, OntimeEvent, RuntimeStore, SimpleTimerState } from './ontime-types.js'
+import { ServiceSection } from './ontime-types.js'
 import { OntimeV3 } from './ontimev3.js'
 
 export const joinTime = (...args: string[]): string => args.join(':')
@@ -155,4 +156,53 @@ export function strictTimerStringToSeconds(str: string): string | number {
 	hh.replace('-', '')
 
 	return isNegative * (Number(ss) + Number(mm) * 60 + Number(hh) * 60 * 60)
+}
+
+export type ServiceInfo = {
+	/** name of the service profile the event belongs to, empty when it belongs to none */
+	name: string
+	section: ServiceSection
+}
+
+const noService: ServiceInfo = { name: '', section: ServiceSection.None }
+
+/**
+ * Resolves which section of a dual service rundown an event belongs to.
+ *
+ * Generated entries carry the profile id in `generatedFor`. The rest are either the
+ * authored master section or rehearsal, which is decided by their position relative to
+ * the boundary block, so this needs the unfiltered rundown rather than just the events.
+ */
+export function getServiceInfo(ontime: OntimeV3, event: OntimeEvent | null): ServiceInfo {
+	if (event === null) {
+		return noService
+	}
+
+	const { boundaryBlockId, services } = ontime.serviceProfiles
+	if (services.length === 0) {
+		return noService
+	}
+
+	if (event.generatedFor) {
+		const profile = services.find((service) => service.id === event.generatedFor)
+		return { name: profile?.name ?? '', section: ServiceSection.Generated }
+	}
+
+	if (boundaryBlockId === null) {
+		// dual service is not configured, there is no master / rehearsal split to report
+		return noService
+	}
+
+	const boundaryIndex = ontime.rundownEntries.findIndex((entry) => entry.id === boundaryBlockId)
+	const eventIndex = ontime.rundownEntries.findIndex((entry) => entry.id === event.id)
+	if (boundaryIndex === -1 || eventIndex === -1) {
+		return noService
+	}
+
+	if (eventIndex < boundaryIndex) {
+		return { name: '', section: ServiceSection.Rehearsal }
+	}
+
+	// the first profile (offset 0) is the authored master
+	return { name: services[0]?.name ?? '', section: ServiceSection.Master }
 }

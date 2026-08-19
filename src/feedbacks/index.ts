@@ -7,6 +7,9 @@ import { createOffsetFeedbacks } from './offset.js'
 import { createAuxTimerFeedbacks } from './auxTimer.js'
 import { createProgressFeedbacks } from './progress.js'
 import { createCustomFieldsFeedbacks } from './customFields.js'
+import { createQlabFeedbacks } from './qlab.js'
+import { createRundownSourceFeedbacks } from './rundownSource.js'
+import { createServiceFeedbacks } from './service.js'
 
 export function feedbacks(ontime: OntimeV3): CompanionFeedbackDefinitions {
 	const feedbacks: { [id: string]: CompanionFeedbackDefinition | undefined } = {
@@ -17,6 +20,9 @@ export function feedbacks(ontime: OntimeV3): CompanionFeedbackDefinitions {
 		...createOffsetFeedbacks(ontime),
 		...createAuxTimerFeedbacks(ontime),
 		...createCustomFieldsFeedbacks(ontime),
+		...createQlabFeedbacks(ontime),
+		...createRundownSourceFeedbacks(ontime),
+		...createServiceFeedbacks(ontime),
 	}
 
 	return feedbacks

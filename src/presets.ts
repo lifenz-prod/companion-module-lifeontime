@@ -21,7 +21,15 @@ import {
 } from './assets/colours.js'
 
 export function presets(): CompanionPresetDefinitions {
-	return { ...playbackPresets, ...timerPresets, ...auxTimerPresets, ...rundownPresets, ...messagePresets }
+	return {
+		...playbackPresets,
+		...timerPresets,
+		...auxTimerPresets,
+		...rundownPresets,
+		...messagePresets,
+		...sourcePresets,
+		...qlabPresets,
+	}
 }
 
 const defaultStyle: CompanionButtonStyleProps = {
@@ -990,5 +998,185 @@ const auxTimerPresets: { [id: string]: CompanionButtonPresetDefinition } = {
 			},
 		],
 		feedbacks: [],
+	},
+}
+
+const sourcePresets: { [id: string]: CompanionButtonPresetDefinition } = {
+	recall_source_by_index: {
+		type: 'button',
+		category: 'Rundown Sources',
+		name: 'Recall a rundown source by index',
+		style: {
+			...defaultStyle,
+			text: '$(ontime:source_name-1)',
+			size: '14',
+		},
+		previewStyle: {
+			...defaultStyle,
+			text: 'Recall 1',
+			size: '14',
+		},
+		steps: [
+			{
+				down: [
+					{
+						actionId: ActionId.LoadSource,
+						options: { method: 'index', sourceIndex: 1, sourceList: '', sourceName: '' },
+					},
+				],
+				up: [],
+			},
+		],
+		feedbacks: [
+			{
+				feedbackId: feedbackId.RundownSourceLoaded,
+				options: { method: 'index', sourceIndex: 1, sourceName: '' },
+				style: {
+					color: White,
+					bgcolor: ActiveBlue,
+				},
+			},
+			{
+				feedbackId: feedbackId.RecallBlocked,
+				options: {},
+				style: {
+					color: NormalGray,
+					bgcolor: Black,
+				},
+			},
+		],
+	},
+	refresh_sources: {
+		type: 'button',
+		category: 'Rundown Sources',
+		name: 'Refresh the rundown source list',
+		style: {
+			...defaultStyle,
+			text: 'Refresh\nsources',
+			size: '14',
+		},
+		previewStyle: {
+			...defaultStyle,
+			text: 'Refresh\nsources',
+			size: '14',
+		},
+		steps: [
+			{
+				down: [
+					{
+						actionId: ActionId.RefreshSources,
+						options: {},
+					},
+				],
+				up: [],
+			},
+		],
+		feedbacks: [
+			{
+				feedbackId: feedbackId.RundownSourceBusy,
+				options: {},
+				style: {
+					color: White,
+					bgcolor: PauseOrange,
+				},
+			},
+			{
+				feedbackId: feedbackId.RundownSourceError,
+				options: {},
+				style: {
+					color: White,
+					bgcolor: DangerRed,
+				},
+			},
+		],
+	},
+	loaded_source: {
+		type: 'button',
+		category: 'Rundown Sources',
+		name: 'Name of the loaded rundown source',
+		style: {
+			...defaultStyle,
+			text: '$(ontime:source_loaded)',
+			size: '14',
+		},
+		previewStyle: {
+			...defaultStyle,
+			text: 'Loaded',
+			size: '14',
+		},
+		steps: [{ down: [], up: [] }],
+		feedbacks: [
+			{
+				feedbackId: feedbackId.RundownSourceError,
+				options: {},
+				style: {
+					color: White,
+					bgcolor: DangerRed,
+				},
+			},
+		],
+	},
+}
+
+const qlabPresets: { [id: string]: CompanionButtonPresetDefinition } = {
+	qlab_cue: {
+		type: 'button',
+		category: 'QLab',
+		name: 'QLab cue number and name',
+		style: {
+			...defaultStyle,
+			text: '$(ontime:qlab_cue_number)\n$(ontime:qlab_cue_name)',
+			size: '14',
+		},
+		previewStyle: {
+			...defaultStyle,
+			text: 'QLab cue',
+			size: '14',
+		},
+		steps: [{ down: [], up: [] }],
+		feedbacks: [
+			{
+				feedbackId: feedbackId.QlabConnection,
+				options: { state: 'disconnected' },
+				style: {
+					color: NormalGray,
+					bgcolor: DangerRed,
+				},
+			},
+		],
+	},
+	qlab_remaining: {
+		type: 'button',
+		category: 'QLab',
+		name: 'QLab cue remaining',
+		style: {
+			...defaultStyle,
+			text: '$(ontime:qlab_remaining_hms)',
+		},
+		previewStyle: {
+			...defaultStyle,
+			text: '00:00:00',
+		},
+		steps: [{ down: [], up: [] }],
+		feedbacks: [
+			{
+				feedbackId: feedbackId.QlabProgressBar,
+				options: {
+					big: false,
+					normal: NormalGray,
+					warning: WarningOrange,
+					danger: DangerRed,
+				},
+				style: {},
+			},
+			{
+				feedbackId: feedbackId.QlabPaused,
+				options: {},
+				style: {
+					color: White,
+					bgcolor: PauseOrange,
+				},
+			},
+		],
 	},
 }

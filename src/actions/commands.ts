@@ -9,4 +9,9 @@ export enum ActionCommand {
 	Message = 'message',
 	Change = 'change',
 	AuxTimer = 'auxtimer',
+	GlobalDelay = 'globaldelay',
+	OffsetMode = 'offsetmode',
+	Sources = 'sources',
+	RefreshSources = 'refreshsources',
+	LoadSource = 'loadsource',
 }
