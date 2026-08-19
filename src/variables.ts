@@ -110,6 +110,22 @@ export function variables(): CompanionVariableDefinition[] {
 			variableId: variableId.RundownOffset,
 		},
 		{
+			name: 'Rundown relative offset (hh:mm:ss)',
+			variableId: variableId.RelativeOffset,
+		},
+		{
+			name: 'Rundown offset mode (absolute/relative)',
+			variableId: variableId.OffsetMode,
+		},
+		{
+			name: 'Rundown global delay (hh:mm:ss)',
+			variableId: variableId.GlobalDelay,
+		},
+		{
+			name: 'Rundown global delay (milliseconds)',
+			variableId: variableId.GlobalDelayMs,
+		},
+		{
 			name: 'Rundown planned start (hh:mm:ss)',
 			variableId: variableId.PlannedStart,
 		},
@@ -212,6 +228,105 @@ export function variables(): CompanionVariableDefinition[] {
 		{
 			name: 'Aux timer 1 direction (count-up/count-down)',
 			variableId: variableId.AuxTimerDirection + '-1',
+		},
+		//service profiles
+		{
+			name: 'Service instance of current event',
+			variableId: variableId.ServiceNow,
+		},
+		{
+			name: 'Service section of current event (rehearsal/master/generated)',
+			variableId: variableId.ServiceSectionNow,
+		},
+		{
+			name: 'Service instance of next event',
+			variableId: variableId.ServiceNext,
+		},
+		{
+			name: 'Service section of next event (rehearsal/master/generated)',
+			variableId: variableId.ServiceSectionNext,
+		},
+		//qlab
+		{
+			name: 'QLab integration enabled',
+			variableId: variableId.QlabEnabled,
+		},
+		{
+			name: 'QLab connected',
+			variableId: variableId.QlabConnected,
+		},
+		{
+			name: 'QLab cue name',
+			variableId: variableId.QlabCueName,
+		},
+		{
+			name: 'QLab cue number',
+			variableId: variableId.QlabCueNumber,
+		},
+		{
+			name: 'QLab cue duration (hh:mm:ss)',
+			variableId: variableId.QlabDuration,
+		},
+		{
+			name: 'QLab cue duration (milliseconds)',
+			variableId: variableId.QlabDurationMs,
+		},
+		{
+			name: 'QLab cue elapsed (hh:mm:ss)',
+			variableId: variableId.QlabElapsed,
+		},
+		{
+			name: 'QLab cue elapsed (milliseconds)',
+			variableId: variableId.QlabElapsedMs,
+		},
+		{
+			name: 'QLab cue remaining (hh:mm:ss)',
+			variableId: variableId.QlabRemaining,
+		},
+		{
+			name: 'QLab cue remaining (milliseconds)',
+			variableId: variableId.QlabRemainingMs,
+		},
+		{
+			name: 'QLab cue paused',
+			variableId: variableId.QlabPaused,
+		},
+		{
+			name: 'QLab cue phase (Default/Warning/Danger/Overtime)',
+			variableId: variableId.QlabPhase,
+		},
+		//rundown sources
+		{
+			name: 'Rundown source provider',
+			variableId: variableId.SourceProvider,
+		},
+		{
+			name: 'Rundown source container id (eg. the sheet ID)',
+			variableId: variableId.SourceContainerId,
+		},
+		{
+			name: 'Number of available rundown sources',
+			variableId: variableId.SourceCount,
+		},
+		{
+			name: 'Name of the rundown source last recalled',
+			variableId: variableId.SourceLoaded,
+		},
+		{
+			name: 'Rundown source refresh or recall in flight',
+			variableId: variableId.SourceLoading,
+		},
+		{
+			name: 'Reason the last rundown source operation failed',
+			variableId: variableId.SourceError,
+		},
+		{
+			name: 'Rundown source list revision',
+			variableId: variableId.SourceRevision,
+		},
+		{
+			name: 'Available rundown sources (comma separated)',
+			variableId: variableId.SourceList,
 		},
 	]
 }

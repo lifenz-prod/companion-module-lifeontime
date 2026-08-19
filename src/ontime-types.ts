@@ -30,6 +30,10 @@ export type OntimeBaseEvent = {
 	type: SupportedEvent
 	id: string
 	after?: string // used when creating an event to indicate its position in rundown
+	/** ServiceProfile id this entry was generated for; absent on rehearsal and master-section entries */
+	generatedFor?: string
+	/** Id of the master entry this generated entry was cloned from */
+	mirrorOf?: string
 }
 
 export enum EndAction {
@@ -66,6 +70,12 @@ export type RuntimeStore = {
 	currentBlock: CurrentBlockState
 	// extra timers
 	auxtimer1: SimpleTimerState
+
+	// external integrations
+	qlab: QlabState
+
+	// recallable rundown sources
+	rundownSources: RundownSourcesState
 }
 
 /**
@@ -102,11 +112,19 @@ export type TimerState = {
 export type Runtime = {
 	numEvents: number
 	selectedEventIndex: number | null
+	globalDelay: number
 	offset: number | null
+	relativeOffset: number | null
 	plannedStart: number | null
 	actualStart: number | null
 	plannedEnd: number | null
 	expectedEnd: number | null
+	offsetMode: OffsetMode
+}
+
+export enum OffsetMode {
+	Absolute = 'absolute',
+	Relative = 'relative',
 }
 
 // Event
@@ -192,4 +210,72 @@ export type OntimeBlock = OntimeBaseEvent & {
 export type CurrentBlockState = {
 	block: OntimeBlock | null
 	startedAt: number | null
+}
+
+// QLab integration
+
+/**
+ * State of the QLab connection, published by ontime as `ontime-qlab`.
+ * Read only, ontime exposes no integration commands for QLab.
+ */
+export type QlabState = {
+	enabled: boolean
+	connected: boolean
+	cueName: string
+	cueNumber: string
+	duration: number // milliseconds
+	elapsed: number // milliseconds
+	remaining: number // milliseconds
+	isPaused: boolean
+	phase: TimerPhase
+}
+
+// Rundown sources
+
+/** Where a recallable rundown comes from, currently only the linked Google Sheet */
+export type RundownSourceProvider = 'gsheet'
+
+/** A rundown which lives outside the project file and can be recalled into it */
+export type RundownSource = {
+	/** 1 based position in the list, this is the address used for recall */
+	index: number
+	name: string
+}
+
+export type RundownSourcesState = {
+	provider: RundownSourceProvider | null
+	containerId: string | null
+	sources: RundownSource[]
+	/** name of the source last recalled, null before the first recall */
+	loaded: string | null
+	/** a refresh or a recall is in flight */
+	loading: boolean
+	/** reason the last operation failed, cleared on success */
+	error: string | null
+	/** increments on every successful refresh */
+	revision: number
+}
+
+// Service profiles (dual service mode)
+
+export type ServiceProfile = {
+	id: string
+	name: string
+	/** milliseconds added to the master section's times for this instance, the authored master is 0 */
+	offset: number
+}
+
+export type ServiceProfiles = {
+	/** block that begins the master service section, entries before it are rehearsal */
+	boundaryBlockId: string | null
+	/** ordered service instances, the first (offset 0) is the authored master */
+	services: ServiceProfile[]
+}
+
+/** Which section of a dual service rundown an event belongs to */
+export enum ServiceSection {
+	None = '',
+	Rehearsal = 'rehearsal',
+	Master = 'master',
+	Generated = 'generated',
 }
