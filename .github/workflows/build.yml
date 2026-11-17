@@ -28,3 +28,4 @@ jobs:
         with:
           path: './pkg'
           name: 'getontime-ontime'
+          retention-days: 7
